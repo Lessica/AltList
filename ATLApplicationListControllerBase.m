@@ -216,11 +216,9 @@
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+	dispatch_async(dispatch_get_main_queue(), ^(void) {
 		_searchKey = searchController.searchBar.text;
-		dispatch_async(dispatch_get_main_queue(), ^(void){
-			[self reloadSpecifiers];
-		});
+		[self reloadSpecifiers];
 	});
 }
 
