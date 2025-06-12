@@ -475,9 +475,14 @@
 
 	[_specifiers enumerateObjectsUsingBlock:^(PSSpecifier* specifier, NSUInteger idx, BOOL *stop)
 	{
-		NSString* trimmedName = [specifier.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		NSString* trimmedName = specifier.name;
+		trimmedName = [trimmedName stringByTrimmingCharactersInSet:[NSCharacterSet controlCharacterSet]];
+		trimmedName = [trimmedName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 		// RTL/LTR characters, WhatsApp has an LTR character in front of it's name
 		trimmedName = [trimmedName stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\u200E\u200F"]];
+		trimmedName = [trimmedName stringByApplyingTransform:NSStringTransformStripCombiningMarks reverse:NO];
+		trimmedName = [trimmedName stringByApplyingTransform:NSStringTransformToLatin reverse:NO];
+		trimmedName = [trimmedName stringByApplyingTransform:NSStringTransformStripDiacritics reverse:NO];
 
 		NSString* firstLetter = @"#";
 		if(trimmedName.length > 0)

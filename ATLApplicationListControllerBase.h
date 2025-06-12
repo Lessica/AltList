@@ -44,6 +44,7 @@
 - (void)_populateSections;
 
 - (void)loadPreferences;
+- (void)savePreferences;
 - (void)prepareForPopulatingSections;
 - (NSString*)localizedStringForString:(NSString*)string;
 - (void)reloadApplications;
