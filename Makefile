@@ -2,7 +2,7 @@ ifneq ($(SIMULATOR),)
 ARCHS := x86_64 arm64
 TARGET := simulator:clang:latest:15.0
 else
-ifeq ($(THEOS_PACKAGE_SCHEME),rootless)
+ifneq ($(THEOS_PACKAGE_SCHEME),)
 TARGET := iphone:clang:16.5:15.0
 else
 TARGET := iphone:clang:14.5:7.0
